@@ -14,7 +14,7 @@ class LineOfResponse:
         
     def getNumPoints(self, spacing):
         num_points = math.floor(self._length/spacing) + 1# numper of discrete points
-        return num_points
+        return int(num_points)
         
     def getLineID(self):
         return self._line_ID

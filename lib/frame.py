@@ -58,6 +58,7 @@ class Frame:
         for line in self._lines: # count the total number of points that will be used in the tessellation
             total_points += line.getNumPoints(self._spacing)
             
+        total_points = int(total_points)
         # create an array of zeros to be populated with Voronoi seeds
         self._all_points = np.zeros((total_points,3))
         self._line_indices = np.zeros((total_points))
