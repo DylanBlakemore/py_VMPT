@@ -69,13 +69,16 @@ for file_num in range(start_file, 1):#end_file
         
         n_clusters = len(set(labels)) - (1 if -1 in labels else 0)
         
-        print(n_clusters)
-        
         locations = np.zeros((n_clusters,3))
         
         # Loop over clusters using 'where'
         for cluster in range(0, n_clusters):
-            j = 1
+            cluster_inds = np.where(labels == cluster)[0]
+            location = np.sum(remainders[cluster_inds,:], axis=0)/len(cluster_inds)
+            locations[cluster,:] = location
+            
+        print(locations)
+      
          
         # Loop over all points individually
         #for i in range(0, len(low_vol)):
