@@ -11,7 +11,9 @@ all_sorted = all_locations[np.argsort(all_locations[:,3])] # sort according to t
 unique_times = np.unique(all_sorted[:,3])
 num_intervals = unique_times.size
 
-
+for interval in range(0, num_intervals):
+    
+    
 
 
 
