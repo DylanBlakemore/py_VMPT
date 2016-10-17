@@ -22,8 +22,11 @@ def writeOutputToFile(output_folder, location_output):
         np.savetxt(output_fname, stripped_location, delimiter=',')
     return None
     
-def printProgress(file_num, progress):
+def printProgress(file_num, progress, average_tracers):
+    print('-')
     print("File " + str(file_num + 1) + " progress: " + str(progress) + "%")
+    print("Average number of tracers per frame: %.2f" % average_tracers)
+    
     
     
     
