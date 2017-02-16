@@ -28,7 +28,4 @@ def printProgress(file_num, progress, average_tracers):
     print("Average number of tracers per frame: %.2f" % average_tracers)
     
     
-def fakeFunction:
-    return 0
-    
 
