@@ -21,7 +21,7 @@ LINES_PER_TRACER = config.getint('Frame','Lines_Per_Tracer') # number of LOR's u
 EPS = config.getfloat('Cluster','Eps')                       # search distance used in both LOF and DBSCAN. Also separation distance
 K   = config.getint('Cluster','K')                           # number of points used in LOF and DBSCAN
 MAX_OUTPUT = config.getint('LocationOutput','Max_Output')    # maximum number of entries in the output array before writing to disk
-PERCENT_INC = config.getfloat('LocationOutput','Percent_Int')# progress display increment
+PERCENT_INC = config.getfloat('LocationOutput','Percent_Inc')# progress display increment
 LOF_FRAC = config.getfloat('Filter','Lof_Frac')
 VOL_FRAC = config.getfloat('Filter','Vol_Frac')
 ########################
@@ -68,11 +68,12 @@ for file_num in range(start_file, end_file):
     print('Data loaded')
     
     num_frames = data_file.getNumFrames()
+    num_frames = 100
     location_output = np.zeros((MAX_OUTPUT,4))
     output_index = 0
     
-    file_percent_done = 0
-    file_progress = 0
+    file_percent_done = 0.0
+    file_progress = 0.0
     
     # Total tracers located in the frame. Used to calculate the average
     # number of tracers.
@@ -123,10 +124,11 @@ for file_num in range(start_file, end_file):
                 output_index += n_clusters
                 
             # If the percent completed is greater than the next integer, print the progress
-            file_percent_done = (float(frame_num) + 1)/float(num_frames)
+            file_percent_done = ((float(frame_num) + 1)/float(num_frames)) * 100
+            #print("File progress: %.2f" % file_percent_done)
             if file_percent_done >= file_progress + PERCENT_INC:
                 average_num_tracers = float(tracers_located)/float(frame_num + 1)
-                file_progress = file_progress + PERCENT_INC
+                file_progress = file_percent_done
                 vuti.printProgress(file_num, file_progress, average_num_tracers)
             
         vuti.writeOutputToFile(output_folder, location_output)
